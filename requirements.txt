@@ -1,0 +1,6 @@
+alembic
+uvicorn
+strawberry-graphql
+starlette
+SQLAlchemy
+pandas

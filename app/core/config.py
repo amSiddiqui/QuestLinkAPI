@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     HOST_PORT: int = int(os.environ.get("HOST_PORT", "8000"))
     BASE_URL: str = f"{HOST_HTTP}{HOST_URL}:{HOST_PORT}"
     DATABASE_URL: str = os.environ.get("DATABASE_URL", "sqlite:///./app.db")
+    DEBUG: bool = os.environ.get("DEBUG", False)
 
 
 settings = Settings()

@@ -4,6 +4,7 @@ Each class represents a table in the database.
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, Table, Boolean
+from sqlalchemy.orm import relationship
 from app.db.session import Base
 
 
@@ -52,6 +53,12 @@ class Game(Base):
     total_rating = Column(Float)
     total_rating_count = Column(Integer)
 
+    genres = relationship("Genre", secondary=game_genre_association, back_populates="games")
+    platforms = relationship("Platform", secondary=game_platform_association, back_populates="games")
+    age_ratings = relationship("AgeRating", secondary=game_age_rating_association, back_populates="games")
+    companies = relationship("Company", secondary=game_company_association, back_populates="games")
+    parent = relationship("Game", remote_side=[id], backref="children")
+
 
 class Company(Base):
     __tablename__ = "companies"
@@ -62,6 +69,7 @@ class Company(Base):
     name = Column(String, index=True)
     url = Column(String)
     parent = Column(Integer, ForeignKey("companies.id"))
+    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
 
 
 class Category(Base):
@@ -79,6 +87,7 @@ class AgeRating(Base):
     rating = Column(Integer)
     rating_system = Column(String)
     rating_description = Column(String)
+    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
 
 
 class Genre(Base):
@@ -87,6 +96,7 @@ class Genre(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     url = Column(String)
+    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
 
 class Platform(Base):
     __tablename__ = "platforms"
@@ -97,3 +107,4 @@ class Platform(Base):
     generation = Column(Integer)
     abbreviation = Column(String)
     summary = Column(String)
+    games = relationship("Game", secondary=game_genre_association, back_populates="genres")

@@ -69,7 +69,7 @@ class Company(Base):
     name = Column(String, index=True)
     url = Column(String)
     parent = Column(Integer, ForeignKey("companies.id"))
-    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
+    games = relationship("Game", secondary=game_company_association, back_populates="companies")
 
 
 class Category(Base):
@@ -87,7 +87,7 @@ class AgeRating(Base):
     rating = Column(Integer)
     rating_system = Column(String)
     rating_description = Column(String)
-    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
+    games = relationship("Game", secondary=game_age_rating_association, back_populates="age_ratings")
 
 
 class Genre(Base):
@@ -107,4 +107,4 @@ class Platform(Base):
     generation = Column(Integer)
     abbreviation = Column(String)
     summary = Column(String)
-    games = relationship("Game", secondary=game_genre_association, back_populates="genres")
+    games = relationship("Game", secondary=game_platform_association, back_populates="platforms")

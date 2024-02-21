@@ -7,8 +7,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from app.core.config import settings
+from contextlib import contextmanager
 
 engine = create_engine(settings.DATABASE_URL, echo=settings.DEBUG)
 Session = sessionmaker(bind=engine, expire_on_commit=False, autocommit=False, autoflush=False)
 Base = declarative_base()
-

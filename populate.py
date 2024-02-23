@@ -6,14 +6,14 @@ from datetime import datetime
 import tqdm
 
 current_file = Path(__file__).resolve()
-csv_dir = current_file.parent.parent / "igdb_api_video_game_ratings_data"
+CSV_DIR = Path(current_file.parent.parent / "igdb_api_video_game_ratings_data")
 
-games_csv = csv_dir / 'data_200K.csv'
-companies_csv = csv_dir / 'companies.csv'
-category_mapping_csv = csv_dir / 'category_mapping.csv'
-genres_csv = csv_dir / 'genres.csv'
-platforms_csv = csv_dir / 'platforms.csv'
-age_ratings_csv = csv_dir / 'age_ratings.csv'
+games_csv = CSV_DIR / 'data_200K.csv'
+companies_csv = CSV_DIR / 'companies.csv'
+category_mapping_csv = CSV_DIR / 'category_mapping.csv'
+genres_csv = CSV_DIR / 'genres.csv'
+platforms_csv = CSV_DIR / 'platforms.csv'
+age_ratings_csv = CSV_DIR / 'age_ratings.csv'
 
 def populate_categories(session):
     df = pd.read_csv(category_mapping_csv)
@@ -136,4 +136,8 @@ def populate_games():
         
         
 if __name__ == '__main__':
+    print('Populating tables')
+    populate_tables()
+    print('Populating games')
     populate_games()
+    print('Done')

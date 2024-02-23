@@ -2,3 +2,6 @@ __pycache__
 .vscode
 app.db
 .env
+.idea
+venv
+gql-env

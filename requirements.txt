@@ -4,3 +4,10 @@ strawberry-graphql
 starlette
 SQLAlchemy
 pandas
+tqdm
+pydantic
+pydantic-settings
+uvicorn[standard]
+rich
+typer
+libcst
